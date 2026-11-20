@@ -23,6 +23,7 @@ def api_root(request, format=None):
         'Login': reverse('login', request=request),
         'Profile': reverse('profile', request=request),
         'Bookings': reverse('booking-list', request=request),
+        'Rooms': reverse('room-list', request=request),
     })
 
 @api_view(['POST'])
