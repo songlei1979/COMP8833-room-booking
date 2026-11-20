@@ -40,4 +40,4 @@ class BookingSerializer(serializers.ModelSerializer):
             'start_time',
             'end_time'
         ]
-        read_only_fields = ['user', 'event_id']
+        read_only_fields = ['user']
