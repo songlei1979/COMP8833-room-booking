@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Booking
+from .models import Booking, Room
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
@@ -16,6 +17,18 @@ class RegisterSerializer(serializers.ModelSerializer):
         return User.objects.create_user(**validated_data)
 
 
+class RoomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Room
+        fields = [
+            'id',
+            'room_number',
+            'capacity',
+            'location',
+            'has_projector'
+        ]
+
+
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
@@ -23,7 +36,7 @@ class BookingSerializer(serializers.ModelSerializer):
             'id',
             'user',
             'event_id',
-            'room_number',
+            'room',
             'start_time',
             'end_time'
         ]

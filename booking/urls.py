@@ -5,10 +5,11 @@ from rest_framework.routers import DefaultRouter
 
 from .views import register, login, profile, api_root
 
-from .viewsets import BookingViewSet
+from .viewsets import BookingViewSet, RoomViewSet
 
 router = DefaultRouter()
 router.register('bookings', BookingViewSet, basename='booking')
+router.register('rooms', RoomViewSet, basename='room')
 router.APIRootView.permission_classes = [AllowAny]
 urlpatterns = [
     path('', api_root, name='api-root'),
