@@ -16,20 +16,11 @@ class RoomViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = RoomSerializer
     permission_classes = [AllowAny]
 
-class BookingViewSet(viewsets.ReadOnlyModelViewSet):
+class BookingViewSet(viewsets.ModelViewSet):
     serializer_class = BookingSerializer
-    permission_classes = [
-        IsAuthenticatedOrReadOnly,
-        IsBookingOwner
-    ]
+    permission_classes = [IsAuthenticated, IsBookingOwner]
 
     def get_queryset(self):
-        # Anonymous users can view the API,
-        # but cannot access any booking records.
-        if not self.request.user.is_authenticated:
-            return Booking.objects.none()
-
-        # Authenticated users can only see their bookings.
         return Booking.objects.filter(
             user=self.request.user
         )
